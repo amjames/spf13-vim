@@ -20,7 +20,7 @@ app_name='spf13-vim'
 [ -z "$REPO_URI" ] && REPO_URI='https://github.com/amjames/spf13-vim.git'
 [ -z "$REPO_BRANCH" ] && REPO_BRANCH='3.0'
 debug_mode='0'
-fork_maintainer='amjames'
+fork_maintainer='0'
 [ -z "$VUNDLE_URI" ] && VUNDLE_URI="https://github.com/gmarik/vundle.git"
 
 ############################  BASIC SETUP TOOLS
@@ -80,6 +80,7 @@ lnif() {
     debug
 }
 
+
 ############################ SETUP FUNCTIONS
 
 do_backup() {
@@ -131,7 +132,6 @@ create_symlinks() {
         lnif "$source_path/.vimrc"     "$target_path/.config/nvim/init.vim"
     fi
 
-    touch  "$target_path/.vimrc.local"
 
     ret="$?"
     success "Setting up vim symlinks."
@@ -143,10 +143,6 @@ setup_fork_mode() {
     local target_path="$3"
 
     if [ "$1" -eq '1' ]; then
-        touch "$target_path/.vimrc.fork"
-        touch "$target_path/.vimrc.bundles.fork"
-        touch "$target_path/.vimrc.before.fork"
-
         lnif "$source_path/.vimrc.fork"         "$target_path/.vimrc.fork"
         lnif "$source_path/.vimrc.bundles.fork" "$target_path/.vimrc.bundles.fork"
         lnif "$source_path/.vimrc.before.fork"  "$target_path/.vimrc.before.fork"
@@ -172,6 +168,12 @@ setup_vundle() {
 
     success "Now updating/installing plugins using Vundle"
     debug
+}
+
+add_colors() {
+    for color in `ls $source_path/colors`; do
+        cp $color $HOME/.vim/bundle/vim-colorschemes/colors/.
+    done;
 }
 
 ############################ MAIN()
@@ -201,6 +203,9 @@ sync_repo       "$HOME/.vim/bundle/vundle" \
                 "vundle"
 
 setup_vundle    "$APP_PATH/.vimrc.bundles.default"
+
+# hack to add my colorschemes!
+add_colors
 
 msg             "\nThanks for installing $app_name."
 msg             "© `date +%Y` http://vim.spf13.com/"

@@ -283,7 +283,7 @@
         let mapleader=g:spf13_leader
     endif
     if !exists('g:spf13_localleader')
-        let maplocalleader = '_'
+        let maplocalleader = '|'
     else
         let maplocalleader=g:spf13_localleader
     endif
@@ -410,7 +410,18 @@
     else
         nmap <silent> <leader>/ :set invhlsearch<CR>
     endif
-
+    
+inoremap jk      <esc>
+inoremap <esc>   <nop>
+""No arrow keys 
+inoremap <Up>    <nop>
+inoremap <Down>  <nop>
+inoremap <Left>  <nop>
+inoremap <Right> <nop>
+noremap  <Up>    <nop>
+noremap  <Down>  <nop>
+noremap  <Left>  <nop>
+noremap  <Right> <nop>
 
     " Find merge conflict markers
     map <leader>fc /\v^[<\|=>]{7}( .*\|$)<CR>
