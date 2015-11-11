@@ -258,6 +258,9 @@
     autocmd BufNewFile,BufRead *.html.twig set filetype=html.twig
     autocmd FileType haskell,puppet,ruby,yml setlocal expandtab shiftwidth=2 softtabstop=2
     " preceding line best in a plugin but here for now.
+    
+    "workaround for psi4 input files to be recognized as python"
+    autocmd BufNewFile,BufRead input.dat,*.psi4.in,*.in.dat set filetype=python
 
     autocmd BufNewFile,BufRead *.coffee set filetype=coffee
 

@@ -16,11 +16,11 @@
 
 ############################  SETUP PARAMETERS
 app_name='spf13-vim'
-[ -z "$APP_PATH" ] && APP_PATH="$HOME/.spf13-vim-3"
-[ -z "$REPO_URI" ] && REPO_URI='https://github.com/spf13/spf13-vim.git'
+[ -z "$APP_PATH" ] && APP_PATH="$HOME/Git/dotfiles/vim"
+[ -z "$REPO_URI" ] && REPO_URI='https://github.com/amjames/spf13-vim.git'
 [ -z "$REPO_BRANCH" ] && REPO_BRANCH='3.0'
 debug_mode='0'
-fork_maintainer='0'
+fork_maintainer='amjames'
 [ -z "$VUNDLE_URI" ] && VUNDLE_URI="https://github.com/gmarik/vundle.git"
 
 ############################  BASIC SETUP TOOLS
@@ -41,13 +41,13 @@ error() {
 
 debug() {
     if [ "$debug_mode" -eq '1' ] && [ "$ret" -gt '1' ]; then
-        msg "An error occurred in function \"${FUNCNAME[$i+1]}\" on line ${BASH_LINENO[$i+1]}, we're sorry for that."
-    fi
-}
+		msg "An error occurred in function \"${FUNCNAME[$i+1]}\" on line ${BASH_LINENO[$i+1]}, we're sorry for that."
+	    fi
+	}
 
-program_exists() {
-    local ret='0'
-    command -v $1 >/dev/null 2>&1 || { local ret='1'; }
+	program_exists() {
+	    local ret='0'
+	    command -v $1 >/dev/null 2>&1 || { local ret='1'; }
 
     # fail on non-zero return value
     if [ "$ret" -ne 0 ]; then
