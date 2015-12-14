@@ -980,7 +980,7 @@ noremap  <Right> <nop>
             " For snippet_complete marker.
             if !exists("g:spf13_no_conceal")
                 if has('conceal')
-                    set conceallevel=2 concealcursor=i
+                    set conceallevel=0 concealcursor=i
                 endif
             endif
 
@@ -1233,3 +1233,6 @@ noremap  <Right> <nop>
         endif
     endif
 " }
+"
+let g:tex_conceal = ""
+set wrap
