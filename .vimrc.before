@@ -152,6 +152,9 @@ let g:airline_theme = 'bubblegum'
         let g:airline_section_y = airline#section#create(['%t'])
     endfunction
     autocmd VimEnter * call AirLineInit()
+    autocmd VimEnter * autocmd WinEnter * let w:created=1
+    autocmd WinEnter * if !exists('w:created') | :AirlineRefresh | endif
+
 
 "
 "     }
