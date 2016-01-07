@@ -257,11 +257,14 @@
     "autocmd FileType go autocmd BufWritePre <buffer> Fmt
     autocmd BufNewFile,BufRead *.html.twig set filetype=html.twig
     autocmd FileType haskell,puppet,ruby,yml setlocal expandtab shiftwidth=2 softtabstop=2
-    autocmd FileType c,cpp set expandtab shiftwidth=2 softtabstop=2 tabstop=2
+    autocmd FileType c,cpp  setlocal expandtab shiftwidth=2 softtabstop=2 tabstop=2 foldmethod=syntax
     " preceding line best in a plugin but here for now.
     
     "workaround for psi4 input files to be recognized as python"
     autocmd BufNewFile,BufRead input.dat,*.psi4.in,*.in.dat set filetype=python
+    "hacks for re-seting file type specific options
+    autocmd BufNewFile,BufRead *.c set filetype=c
+    autocmd BufNewFile,BufRead *.cpp,*.cc,*.h,*.hpp set filetype=cpp
 
     autocmd BufNewFile,BufRead *.coffee set filetype=coffee
 
@@ -272,7 +275,7 @@
 
 " }
 
-" Key (re)Mappings {
+"  Key (re)Mappings {
 
     " The default leader is '\', but many people prefer ',' as it's in a standard
     " location. To override this behavior and set it back to '\' (or any other
@@ -1237,3 +1240,4 @@ noremap  <Right> <nop>
 "
 let g:tex_conceal = ""
 set wrap
+
