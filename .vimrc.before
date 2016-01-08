@@ -145,6 +145,14 @@ let g:airline_theme = 'bubblegum'
         \ 'S'  : 'S',
         \ '' : 'S',
         \}
+    let g:airline#extensions#default#section_truncate_width ={
+                \ 'b': 78,
+                \ 'c': 45,
+                \ 'x': 89,
+                \ 'y': 25,
+                \ 'z': 45,
+                \ 'warning': 88
+                \}
     function! AirLineInit()
         let g:airline_section_a = airline#section#create(['mode'])
         let g:airline_section_c = ''
