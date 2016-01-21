@@ -91,7 +91,7 @@
     " In your .vimrc.before.local file
     " list only the plugin groups you will use
     if !exists('g:spf13_bundle_groups')
-        let g:spf13_bundle_groups=['general', 'writing', 'snipmate', 'programming', 'python', 'html', 'misc',]
+        let g:spf13_bundle_groups=['general', 'writing', 'neocomplete', 'programming', 'python', 'misc',]
     endif
 
     " To override all the included bundles, add the following to your
@@ -109,6 +109,7 @@
             Bundle 'jiangmiao/auto-pairs'
             Bundle 'ctrlpvim/ctrlp.vim'
             Bundle 'tacahiroy/ctrlp-funky'
+            Bundle 'SuperTab'
             "Bundle 'terryma/vim-multiple-cursors'
             Bundle 'vim-scripts/sessionman.vim'
             Bundle 'matchit.zip'
@@ -145,12 +146,13 @@
         if count(g:spf13_bundle_groups, 'programming')
             " Pick one of the checksyntax, jslint, or syntastic
             Bundle 'scrooloose/syntastic'
+            Bundle 'Xuyuanp/nertree-git-plugin'
             Bundle 'tpope/vim-fugitive'
             "Bundle 'mattn/webapi-vim'
             "Bundle 'mattn/gist-vim'
-            "Bundle 'scrooloose/nerdcommenter'
+            Bundle 'scrooloose/nerdcommenter'
             Bundle 'tpope/vim-commentary'
-            Bundle 'godlygeek/tabular'
+            "Bundle 'godlygeek/tabular'
             if executable('ctags')
                 Bundle 'majutsushi/tagbar'
             endif
@@ -177,6 +179,7 @@
         elseif count(g:spf13_bundle_groups, 'neocomplete')
             Bundle 'Shougo/neocomplete.vim.git'
             Bundle 'Shougo/neosnippet'
+            Bundle 'Shougo/neoinclude'
             Bundle 'Shougo/neosnippet-snippets'
             Bundle 'honza/vim-snippets'
         endif
@@ -289,6 +292,7 @@
 " }
 
 " Use fork bundles config if available {
+"
     if filereadable(expand("~/.vimrc.bundles.fork"))
         source ~/.vimrc.bundles.fork
     endif

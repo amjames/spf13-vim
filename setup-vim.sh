@@ -157,7 +157,7 @@ setup_vundle() {
     local system_shell="$SHELL"
     export SHELL='/bin/sh'
 
-    vim \
+    /usr/local/bin/vim \
         -u "$1" \
         "+set nomore" \
         "+BundleInstall!" \
@@ -170,11 +170,11 @@ setup_vundle() {
     debug
 }
 
-add_colors() {
-    for color in `ls $source_path/colors`; do
-        cp $color $HOME/.vim/bundle/vim-colorschemes/colors/.
-    done;
-}
+##add_colors() {
+##    for color in `ls $source_path/colors`; do
+##        cp $color $HOME/.vim/bundle/vim-colorschemes/colors/.
+##    done;
+##}
 
 ############################ MAIN()
 variable_set "$HOME"
@@ -205,7 +205,7 @@ sync_repo       "$HOME/.vim/bundle/vundle" \
 setup_vundle    "$APP_PATH/.vimrc.bundles.default"
 
 # hack to add my colorschemes!
-add_colors
+#add_colors
 
 msg             "\nThanks for installing $app_name."
 msg             "© `date +%Y` http://vim.spf13.com/"

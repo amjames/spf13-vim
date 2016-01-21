@@ -232,6 +232,8 @@
     set foldenable                  " Auto fold code
     set list
     set listchars=tab:›\ ,trail:•,extends:#,nbsp:. " Highlight problematic whitespace
+    set equalalways
+    set eadirection=hor
 
 " }
 
@@ -254,6 +256,7 @@
     " .vimrc.before.local file:
     "   let g:spf13_keep_trailing_whitespace = 1
     autocmd FileType c,cpp,java,go,php,javascript,puppet,python,rust,twig,xml,yml,perl,sql autocmd BufWritePre <buffer> if !exists('g:spf13_keep_trailing_whitespace') | call StripTrailingWhitespace() | endif
+    autocmd FileType tex autocmd BufRead <buffer> NeoCompleteDisable
     "autocmd FileType go autocmd BufWritePre <buffer> Fmt
     autocmd BufNewFile,BufRead *.html.twig set filetype=html.twig
     autocmd FileType haskell,puppet,ruby,yml setlocal expandtab shiftwidth=2 softtabstop=2
@@ -265,6 +268,8 @@
     "hacks for re-seting file type specific options
     autocmd BufNewFile,BufRead *.c set filetype=c
     autocmd BufNewFile,BufRead *.cpp,*.cc,*.h,*.hpp set filetype=cpp
+    autocmd BufNewFile,BufRead *.tex set filetype=tex tw=89 
+
 
     autocmd BufNewFile,BufRead *.coffee set filetype=coffee
 
@@ -312,7 +317,7 @@
     " The lines conflict with the default digraph mapping of <C-K>
     " If you prefer that functionality, add the following to your
     " .vimrc.before.local file:
-    "   let g:spf13_no_easyWindows = 1
+    let g:spf13_no_easyWindows = 1
     if !exists('g:spf13_no_easyWindows')
         map <C-J> <C-W>j<C-W>_
         map <C-K> <C-W>k<C-W>_
@@ -572,7 +577,6 @@ noremap  <Right> <nop>
             map <C-e> <plug>NERDTreeTabsToggle<CR>
             map <leader>e :NERDTreeFind<CR>
             nmap <leader>nt :NERDTreeFind<CR>
-
             let NERDTreeShowBookmarks=1
             let NERDTreeIgnore=['\.py[cd]$', '\~$', '\.swo$', '\.swp$', '^\.git$', '^\.hg$', '^\.svn$', '\.bzr$']
             let NERDTreeChDirMode=0
@@ -676,9 +680,9 @@ noremap  <Right> <nop>
     "}
 
     " TagBar {
-        if isdirectory(expand("~/.vim/bundle/tagbar/"))
-            nnoremap <silent> <leader>tt :TagbarToggle<CR>
-        endif
+        "if isdirectory(expand("~/.vim/bundle/tagbar/"))
+            "nnoremap <silent> <leader>tt :TagbarToggle<CR>
+        "endif
     "}
 
 
@@ -1125,14 +1129,26 @@ noremap  <Right> <nop>
 
     " Initialize NERDTree as needed {
     function! NERDTreeInitAsNeeded()
-        redir => bufoutput
-        buffers!
-        redir END
-        let idx = stridx(bufoutput, "NERD_tree")
-        if idx > -1
-            NERDTreeMirror
-            NERDTreeFind
-            wincmd l
+        if !exists('g:aj_tagbar_open')
+            redir => bufoutput
+            buffers!
+            redir END
+            let idx = stridx(bufoutput, "NERD_tree")
+            if idx > -1
+                NERDTreeMirror
+                NERDTreeFind
+                wincmd l
+            endif
+        elseif g:aj_tagbar_open == 0
+            redir => bufoutput
+            buffers!
+            redir END
+            let idx = stridx(bufoutput, "NERD_tree")
+            if idx > -1
+                NERDTreeMirror
+                NERDTreeFind
+                wincmd l
+            endif
         endif
     endfunction
     " }
@@ -1238,6 +1254,4 @@ noremap  <Right> <nop>
     endif
 " }
 "
-let g:tex_conceal = ""
-set wrap
 
